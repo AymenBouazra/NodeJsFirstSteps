@@ -1,6 +1,19 @@
 const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors')
 const app = express();
+const bodyParser = require('body-parser')
 const port = 3000;
+
+//import connection to database
+// const connect = require('./database/connect');
+//cors config
+app.use(cors())
+//morgan config
+app.use(morgan('dev'))
+// body parser onfig
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.get('/', async (req, res) => {
   res.json({message:'Hello Bouazra'});
