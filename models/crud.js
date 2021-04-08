@@ -4,7 +4,8 @@ const crud = mongoose.Schema({
     lastName:String,
     email:String,
     password:String,
-    age:Number
+    age:Number,
+    todos:[{type:mongoose.Schema.Types.ObjectId, ref: 'crud'}]
 },
 {
     versionKey:false,

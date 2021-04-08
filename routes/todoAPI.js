@@ -4,7 +4,7 @@ const router=express.Router();
 const Todo = require('../models/todoSchema')
 // 1- GET ALL TODOS
 router.get('/todos', async (req, res) => {
-    const Todos = await Todo.find()
+    const Todos = await Todo.find().populate('users')
     res.json(Todos);
   });
 
@@ -31,4 +31,14 @@ router.delete('/todos/:id', async (req, res) => {
     const deleteTodo = await Todo.findByIdAndDelete(req.params.id)
     res.json(deleteTodo);
   });
+
+router.put('/todos/affectUser/:idUser/:idTodo', async (req,res)=> {
+    const updateTodo = await Todo.findByIdAndUpdate(req.params.idTodo,{$push: {users:req.params.idUser}},{new: true})
+    res.json({message : 'User affected'})
+})
+router.put('/todos/disaffectUser/:idUser/:idTodo', async (req,res)=> {
+  const updateTodo = await Todo.findByIdAndUpdate(req.params.idTodo,{$pull: {users:req.params.idUser}},{new: true})
+  res.json({message : 'User affected'})
+})
+
 module.exports = router;
