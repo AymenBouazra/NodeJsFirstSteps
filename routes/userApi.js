@@ -71,6 +71,4 @@ router.put('/crud/disaffectTodo/:idTodo/:idUser', async (req, res) => {
   res.json({message: 'Todo disaffected to user'})
 })
 
-
-
 module.exports = router;
