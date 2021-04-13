@@ -4,7 +4,7 @@ const router=express.Router();
 const Todo = require('../models/todoSchema')
 // 1- GET ALL TODOS
 router.get('/todos', async (req, res) => {
-    const Todos = await Todo.find().populate('crud')
+    const Todos = await Todo.find().populate('todo')
     res.json(Todos);
   });
 

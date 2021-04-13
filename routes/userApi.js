@@ -4,7 +4,7 @@ const router = express.Router();
 const crud = require('../models/crud');
 // 1- GET ALL TODOS
 router.get('/crud', async (req, res) => {
-  const crudTodo = await crud.find().populate('todos')
+  const crudTodo = await crud.find().populate('crud')
   res.json(crudTodo);
 });
 

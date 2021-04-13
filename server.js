@@ -23,19 +23,20 @@ const handelbarOptions = {
 }
 transporter.use('compile', hbs(handelbarOptions));
 // Step 2
-const mailOptiions = {
+const mailOptions = {
     from: 'aymen@gmail.com',
-    to: 'jalleboumaima@gmail.com',
-    subject: 'Bonsoir :*',
-    text: '',
+    to: 'bouazzanadhem@gmail.com',
+    subject: 'Ramadan',
+    text: 'Ramadan Mubarek',
     attachments: [{
-        filename: 'Mypic.JPG', path: './Mypic.jpg'
+        filename: 'ramadan.JPG',
+        path: './ramadan.jpg'
     }],
     template: 'index'
 };
 
 // step3 
-transporter.sendMail(mailOptiions, function (err, data) {
+transporter.sendMail(mailOptions, function (err, data) {
     if (err) {
         console.log('Error Occurs', err);
     } else {
