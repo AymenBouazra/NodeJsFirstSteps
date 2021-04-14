@@ -21,7 +21,7 @@ const userAPI = require('./routes/userApi');
 const userDetailsAPI = require('./routes/userDetailsAPI')
 const tutorialAPI = require('./routes/tutorialAPI')
 const tagAPI = require('./routes/tagAPI');
-const fileAPI = require('./routes/uploadAPI')
+const uploadAPI = require('./routes/uploadAPI')
 const emailAPI = require('./routes/emailAPI')
 const schedule = require('./schedule')
 require('dotenv').config()
@@ -37,9 +37,8 @@ app.use('',userAPI)
 app.use('',userDetailsAPI)
 app.use('',tutorialAPI)
 app.use('',tagAPI);
-app.use('',fileAPI.routes)
 app.use('',emailAPI)
-app.use('/uploads',express.static(path.join(__dirname,'uploads')));
+app.use('',uploadAPI)
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 });

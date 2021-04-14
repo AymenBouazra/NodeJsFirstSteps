@@ -1,5 +1,6 @@
 const cron = require('node-cron');
 
-cron.schedule('*/15 * * * *', () => {
+const task = cron.schedule('* * * * * *', () => {
   console.log('running a task every two minutes');
 });
+task.stop()
