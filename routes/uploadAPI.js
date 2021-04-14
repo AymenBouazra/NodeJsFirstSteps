@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs')
 //file filter
 const fileFilter = (req, file, cb) => {
-    allowedExtensions = ['.png', '.jpg', '.jpeg', '.gif']
+    allowedExtensions = ['.png', '.PNG', '.jpg', '.jpeg', '.gif']
     const extension = path.extname(file.originalname);
     cb(null, allowedExtensions.includes(extension))
 }
@@ -22,8 +22,12 @@ const myStorage = multer.diskStorage({
         cb(null, newFileName)
     }
 });
-const upload = multer({ storage: myStorage, fileFilter: fileFilter , limits:{fileSize:1024*20}})
+const upload = multer({ storage: myStorage, fileFilter: fileFilter , limits:{fileSize:1024*1024*20}})
 router.post('/uploadImage', upload.single('img'), async (req, res) => {
+    res.json({ image: 'image' })
+});
+
+router.post('/uploadMultipleImages', upload.array('img',4), async (req, res) => {
     res.json({ image: 'image' })
 });
 module.exports = router
