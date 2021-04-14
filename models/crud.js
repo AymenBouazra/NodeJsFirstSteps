@@ -5,6 +5,7 @@ const crud = mongoose.Schema({
     email:String,
     password:String,
     age:Number,
+    photo:String,
     todos:[{type:mongoose.Schema.Types.ObjectId, ref: 'crud'}]
 },
 {

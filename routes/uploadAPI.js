@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router();
 const path = require('path');
 const fs = require('fs')
+const user= require('../models/crud')
 //file filter
 const fileFilter = (req, file, cb) => {
     allowedExtensions = ['.png', '.PNG', '.jpg', '.jpeg', '.gif']
@@ -14,16 +15,16 @@ const myStorage = multer.diskStorage({
         const folder = path.resolve('./uploads')
         cb(null, folder)
     },
-    filename: (req, file, cb) => {
+    filename: async (req, file, cb) => {
         const extension = path.extname(file.originalname);
         console.log(extension);
         const newFileName = file.fieldname + '-' + Date.now() + extension
-
+        await user.findByIdAndUpdate(req.params.id,{photo : newFileName})
         cb(null, newFileName)
     }
 });
 const upload = multer({ storage: myStorage, fileFilter: fileFilter , limits:{fileSize:1024*1024*20}})
-router.post('/uploadImage', upload.single('img'), async (req, res) => {
+router.post('/uploadImage/:id', upload.single('img'), async (req, res) => {
     res.json({ image: 'image' })
 });
 

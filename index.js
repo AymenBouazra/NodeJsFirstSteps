@@ -30,7 +30,8 @@ app.get('/', async (req, res) => {
     
   res.json({message:'Hello World'});
 });
-
+//static files 
+app.use(express.static(__dirname + '/uploads'))
 //use routing
 app.use('',todoAPI);
 app.use('',userAPI)
