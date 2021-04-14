@@ -23,7 +23,8 @@ const tutorialAPI = require('./routes/tutorialAPI')
 const tagAPI = require('./routes/tagAPI');
 const fileAPI = require('./routes/uploadAPI')
 const emailAPI = require('./routes/emailAPI')
-
+const schedule = require('./schedule')
+require('dotenv').config()
 
 app.get('/', async (req, res) => {
     
