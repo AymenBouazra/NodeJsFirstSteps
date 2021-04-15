@@ -2,7 +2,8 @@ const multer = require('multer');
 const express = require('express')
 const router = express.Router();
 const path = require('path');
-const fs = require('fs')
+const fs = require('fs');
+const passport = require('passport')
 const user= require('../models/crud')
 //file filter
 const fileFilter = (req, file, cb) => {
@@ -24,11 +25,11 @@ const myStorage = multer.diskStorage({
     }
 });
 const upload = multer({ storage: myStorage, fileFilter: fileFilter , limits:{fileSize:1024*1024*20}})
-router.post('/uploadImage/:id', upload.single('img'), async (req, res) => {
+router.post('/uploadImage/:id', [passport.authenticate('bearer',{session:false}),upload.single('img')], async (req, res) => {
     res.json({ image: 'image' })
 });
 
-router.post('/uploadMultipleImages', upload.array('img',4), async (req, res) => {
+router.post('/uploadMultipleImages',[passport.authenticate('bearer',{session:false}), upload.array('img',4)], async (req, res) => {
     res.json({ image: 'image' })
 });
 module.exports = router

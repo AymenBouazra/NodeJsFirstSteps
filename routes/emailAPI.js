@@ -4,13 +4,14 @@ const router = express.Router();
 const nodemailer = require('nodemailer')
 const app = express()
 const path = require('path')
-const fs = require('fs')
+const fs = require('fs');
+const passport = require('passport')
 require('dotenv').config();
 app.set('views', './views');
 app.set('view engine', 'ejs');
-let message = 'message';
 
-router.get('/sendmailv1', async (req, res) => {
+
+router.get('/sendmailv1',passport.authenticate('bearer',{session:false}), async (req, res) => {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     let testAccount = await nodemailer.createTestAccount();
@@ -38,7 +39,7 @@ router.get('/sendmailv1', async (req, res) => {
     res.json({ message: 'email sent !', URL: nodemailer.getTestMessageUrl(info) })
 })
 
-router.get('/sendmailv2', async (req, res) => {
+router.get('/sendmailv2',passport.authenticate('bearer',{session:false}), async (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {

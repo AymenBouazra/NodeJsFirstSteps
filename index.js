@@ -25,6 +25,7 @@ const uploadAPI = require('./routes/uploadAPI')
 const emailAPI = require('./routes/emailAPI')
 const schedule = require('./schedule')
 const authAPI = require('./routes/authAPI')
+const passport = require('./passport/passport')
 require('dotenv').config()
 
 app.get('/', async (req, res) => {

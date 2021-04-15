@@ -15,7 +15,7 @@ router.post('/login', (req, res) => {
                         res.json({message: error})
                     }
                     if(result){
-                        const token = jwt.sign({name:user.firstName},process.env.JWT,{expiresIn: '1h'})
+                        const token = jwt.sign({name:user.firstName},process.env.JWT,{expiresIn: process.env.JWT_EXPIRE})
                         res.json({message:'Successfully logged in !',token })
                     }else{
                         res.json({ message: 'Please verify your email or password !' })
