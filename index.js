@@ -24,6 +24,7 @@ const tagAPI = require('./routes/tagAPI');
 const uploadAPI = require('./routes/uploadAPI')
 const emailAPI = require('./routes/emailAPI')
 const schedule = require('./schedule')
+const authAPI = require('./routes/authAPI')
 require('dotenv').config()
 
 app.get('/', async (req, res) => {
@@ -40,6 +41,7 @@ app.use('',tutorialAPI)
 app.use('',tagAPI);
 app.use('',emailAPI)
 app.use('',uploadAPI)
+app.use('',authAPI)
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 });
